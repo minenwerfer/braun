@@ -1,3 +1,3 @@
 declare namespace global {
-  var braun__gatheredIcons: Map<string, boolean>
+  var braun__gatheredIcons: Set<string>
 }

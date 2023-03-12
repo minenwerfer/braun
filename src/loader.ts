@@ -6,7 +6,7 @@ export type LoaderOptions = {
   ensureList?: Array<string>
 }
 
-const icons = global.braun__gatheredIcons = new Map<string, boolean>()
+const icons = global.braun__gatheredIcons = new Set<string>()
 
 const emitFile = async (loaderContext: webpack.LoaderContext<LoaderOptions>, iconName: string) => {
   const [style, filename] = iconName.includes(':')
@@ -29,7 +29,7 @@ export default function iconLoader(this: webpack.LoaderContext<LoaderOptions>, s
 
   if( options.ensureList && !icons.size ) {
     options.ensureList.forEach((iconName: string) => {
-      icons.set(iconName, true)
+      icons.add(iconName)
       emitFile(loaderContext, iconName)
     })
   }
@@ -39,11 +39,11 @@ export default function iconLoader(this: webpack.LoaderContext<LoaderOptions>, s
     while( match = regex.exec(source) ) {
       const iconName = match[1]
       if( !icons.has(iconName) ) {
-        icons.set(iconName, true)
+        icons.add(iconName)
         emitFile(loaderContext, iconName)
       }
     }
   }
   
-  return source
+  this.callback(null, source)
 }

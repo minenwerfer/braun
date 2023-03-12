@@ -15,7 +15,7 @@ export default class {
   apply(compiler: webpack.Compiler) {
     compiler.hooks.thisCompilation.tap('Braun', (compilation) => {
       compilation.hooks.finishModules.tap('Braun', () => {
-        const iconNames = [ ...global.braun__gatheredIcons.keys() ]
+        const iconNames = [ ...global.braun__gatheredIcons ]
         if( iconNames.length === 0 ) {
           return
         }
