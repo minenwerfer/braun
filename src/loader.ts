@@ -21,7 +21,11 @@ export default function iconLoader(this: webpack.LoaderContext<LoaderOptions>, s
   const loaderContext = this
 
   const options = loaderContext.getOptions()
-  const regex = new RegExp(`<${options.tag}([^>]*)[^:]name="([^"]+)"`, 'mg')
+  const regexes = [
+    new RegExp(`<${options.tag}[^>]*[^:]name="([^"]+)"`, 'mg'),
+    /<[^>]*[^:]icon="([^"]+)"/mg,
+    /icon: ?['"]([^'"]+)['"]/mg
+  ]
 
   if( options.ensureList && !icons.size ) {
     options.ensureList.forEach((iconName: string) => {
@@ -30,12 +34,14 @@ export default function iconLoader(this: webpack.LoaderContext<LoaderOptions>, s
     })
   }
 
-  let match: Array<string>|null
-  while( match = regex.exec(source) ) {
-    const iconName = match[2]
-    if( !icons.has(iconName) ) {
-      icons.set(iconName, true)
-      emitFile(loaderContext, iconName)
+  for( const regex of regexes ) {
+    let match: Array<string>|null
+    while( match = regex.exec(source) ) {
+      const iconName = match[1]
+      if( !icons.has(iconName) ) {
+        icons.set(iconName, true)
+        emitFile(loaderContext, iconName)
+      }
     }
   }
   

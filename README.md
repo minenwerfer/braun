@@ -83,7 +83,7 @@ defineProps({
 </script>
 ```
 
-### Prelading
+### Preloading
 
 This loader emits a preloading script that you can include in your root HTML to ensure a smoother user experience.
 ```html
