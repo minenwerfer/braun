@@ -6,15 +6,12 @@ export type LoaderOptions = {
   ensureList?: Array<string>
 }
 
-const icons = new Map<string, boolean>()
+const icons = global.braun__gatheredIcons = new Map<string, boolean>()
 
 const emitFile = async (loaderContext: webpack.LoaderContext<LoaderOptions>, iconName: string) => {
-
   const [style, filename] = iconName.includes(':')
     ? iconName.split(':')
     : ['line', iconName]
-
-  console.log(`static/${style}/${filename}.svg`)
 
   const content = await readFile(`${__dirname}/../icons/${style}/${filename}.svg`)
   return loaderContext.emitFile(`static/icons/${style}/${filename}.svg`, content)
@@ -27,7 +24,7 @@ export default function iconLoader(this: webpack.LoaderContext<LoaderOptions>, s
   const regex = new RegExp(`<${options.tag}([^>]*)[^:]name="([^"]+)"`, 'mg')
 
   if( options.ensureList && !icons.size ) {
-    options.ensureList.forEach((iconName) => {
+    options.ensureList.forEach((iconName: string) => {
       icons.set(iconName, true)
       emitFile(loaderContext, iconName)
     })
@@ -41,6 +38,6 @@ export default function iconLoader(this: webpack.LoaderContext<LoaderOptions>, s
       emitFile(loaderContext, iconName)
     }
   }
-
+  
   return source
 }

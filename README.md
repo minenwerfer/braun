@@ -13,6 +13,11 @@ Braun is a lightweight Webpack loader that makes it possible to serve icons stat
 - Icons are inline SVGs, so you can modify them as you want
 
 ## Basic usage
+
+### Webpack
+
+First you need to make some additions in your webpack config file:
+
 ```typescript
 const webpackConfig = {
   resolveLoader: {
@@ -28,12 +33,7 @@ const webpackConfig = {
       {
         test: /\.vue$/,
         use: [
-          {
-            loader: 'vue-loader',
-            options: {
-              reactivityTransform: true
-            }
-          },
+          'vue-loader',
           {
             loader: 'icon-loader',
             options: {
@@ -51,7 +51,43 @@ const webpackConfig = {
         ]
       },
     }
+  ],
+  plugins: [
+    // not required
+    // use this to emit a preload script
+    new require('braun/dist/plugin')()
+  ]
 }
+```
+
+### The component
+
+Next, all you have to do is create your icon component according to your application needs. We gonna be using Vue in this example but it really doesn't matter, you could be using React or anything else, including pure HTML5.
+
+```
+<template>
+  <svg
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+  >
+    <use :href="`/static/icons/${variant}/${name}.svg#root`"></use>
+  </svg>
+</template>
+
+<script setup lang="ts">
+defineProps({
+  variant: String,
+  name: String
+})
+</script>
+```
+
+### Prelading
+
+This loader emits a preloading script that you can include in your root HTML to ensure a smoother user experience.
+```
+<script type="text/javascript" src="/preload-icons.js"></script>
 ```
 
 ## Available icons
