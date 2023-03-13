@@ -11,6 +11,7 @@ Braun is a lightweight Webpack loader that makes it possible to serve icons stat
 - You don't have to move all icons at once
 - Direct referencing icons makes browser caching better
 - Icons are inline SVGs, so you can modify them as you want
+- Much less network usage than icon fonts
 
 ## Basic usage
 
@@ -27,28 +28,23 @@ const webpackConfig = {
     }
   },
   module: {
-    // then set up the loader after vue-loader
+    // then set up the loader after vue/babel/whatever else loader
     // (the order matters)
     rules: [
       {
-        test: /\.vue$/,
-        use: [
-          'vue-loader',
-          {
-            loader: 'icon-loader',
-            options: {
-              // what should we look for in the source files?
-              // in this example we would be using something like <sv-icon name="user" />
-              tag: 'sv-icon',
-              // those are always moved
-              // this is useful when icon names arent present as literals in files
-              ensureList: [
-                'user',
-                'settings'
-              ]
-            }
-          }
-        ]
+        test: /(\.vue|router\.(t|j)s)$/,
+        loader: 'icon-loader',
+        options: {
+          // what should we look for in the source files?
+          // in this example we would be using something like <sv-icon name="user" />
+          tag: 'sv-icon',
+          // those are always moved
+          // this is useful when icon names arent present as literals in files
+          ensureList: [
+            'user',
+            'settings'
+          ]
+        }
       },
     }
   ],
@@ -75,7 +71,7 @@ Next, all you have to do is create your icon component according to your applica
   </svg>
 </template>
 
-<script setup lang="ts">
+<script setup>
 defineProps({
   variant: String,
   name: String
