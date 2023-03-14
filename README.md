@@ -13,7 +13,7 @@ Braun is a lightweight Webpack loader that makes it possible to serve icons stat
 - Icons are inline SVGs, so you can modify them as you want
 - Much less network usage than icon fonts
 
-## Basic usage
+## Usage
 
 ### Webpack
 
@@ -46,8 +46,8 @@ const webpackConfig = {
           ]
         }
       },
-    }
-  ],
+    ]
+  },
   plugins: [
     // not required
     // use this to emit a preload script

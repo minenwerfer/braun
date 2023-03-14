@@ -13,8 +13,12 @@ const emitFile = async (loaderContext: webpack.LoaderContext<LoaderOptions>, ico
     ? iconName.split(':')
     : ['line', iconName]
 
-  const content = await readFile(`${__dirname}/../icons/${style}/${filename}.svg`)
-  return loaderContext.emitFile(`static/icons/${style}/${filename}.svg`, content)
+  try {
+    const content = await readFile(`${__dirname}/../icons/${style}/${filename}.svg`)
+    return loaderContext.emitFile(`static/icons/${style}/${filename}.svg`, content)
+  } catch( e ) {
+    loaderContext.emitError(new Error(`icon ${iconName} not found`))
+  }
 }
 
 export default function iconLoader(this: webpack.LoaderContext<LoaderOptions>, source: string) {
