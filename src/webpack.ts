@@ -1,17 +1,19 @@
 import webpack from 'webpack'
+import { Options, scrapper, preloadScript } from './common'
 
-const preloadScript = (iconNames: Array<string>) =>
-`"${iconNames.join(' ')}".split(' ').forEach((iconName) => {
-  const img = new Image()
-  const [style, filename] = iconName.includes(':')
-    ? iconName.split(':')
-    : ['line', iconName]
+export function loader(this: webpack.LoaderContext<Options>, source: string) {
+  const loaderContext = this
+  const scrap = scrapper(
+    loaderContext.getOptions(),
+    loaderContext.emitFile,
+    loaderContext.emitError
+  )
 
-  img.src = '/static/icons/' + style + '/' + filename + '.svg'
-})
-`
+  scrap(source)
+  loaderContext.callback(null, source)
+}
 
-export default class {
+export class Plugin {
   apply(compiler: webpack.Compiler) {
     compiler.hooks.thisCompilation.tap('Braun', (compilation) => {
       compilation.hooks.finishModules.tap('Braun', () => {

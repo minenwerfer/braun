@@ -1,6 +1,6 @@
 {
   "name": "braun",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -11,5 +11,8 @@
   "license": "ISC",
   "dependencies": {
     "webpack": "^5.76.1"
+  },
+  "devDependencies": {
+    "rollup": "^3.20.2"
   }
 }
