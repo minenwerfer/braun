@@ -35,18 +35,24 @@
     </div>
 
     <button @click="clear">clear</button>
+    <a href="https://github.com/ringeringeraja/braun" target="_blank">
+      <icon name="github" width="32" height="32"></icon>
+    </a>
   </div>
 
   <div class="icons-grid">
     <div
       v-for="icon in icons"
-      :key="icon.name"
+      :key="`${icon.style}-${icon.name}`"
       class="icon-container"
     >
-      <icon v-bind="{
-        name: icon.name,
-        variant: icon.style
-      }"></icon>
+      <icon
+        v-bind="{
+          name: icon.name,
+          variant: icon.style
+        }"
+        fill="blue"
+      ></icon>
       <div class="icon-info">
         <div>{{ icon.name }}</div>
         <div>{{ icon.style }}</div>
