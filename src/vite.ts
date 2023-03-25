@@ -52,6 +52,6 @@ export default (options: Options = {}): Plugin => ({
       return
     }
 
-    await writeFile('preload-script.js', preloadScript(iconNames))
+    await writeFile('dist/preload-script.js', preloadScript(iconNames))
   }
 })
