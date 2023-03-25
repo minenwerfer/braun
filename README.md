@@ -1,5 +1,5 @@
 # Braun
->Serve icons over network for your frontend project
+>Icons just in time!
 
 ## Introduction
 
