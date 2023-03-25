@@ -3,7 +3,7 @@
 
 ## Introduction
 
-Braun is a lightweight Webpack loader that makes it possible to serve icons statically on demand. It searches for icons names in modules source code and moves them to a static folder during the build time. All design credits goes to [Iconscout](https://github.com/iconscout/unicons).
+Braun is a Vite/Webpack plugin that makes it possible to serve icons statically on demand. It searches for icons names in modules source code and moves them to a static folder during the build time. All design credits goes to [Iconscout](https://github.com/iconscout/unicons).
 
 ## Advantages
 
