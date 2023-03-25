@@ -107,7 +107,7 @@ This loader emits a preloading script that you can include in your root HTML to 
 
 ## Available icons
 
-Please head to https://antonreshetov.github.io/vue-unicons/.
+Please head to [https://ringeringeraja.github.io/braun/](https://ringeringeraja.github.io/braun/).
 
 ## Credits
 This project was inspired by [Vue Unicons](https://github.com/antonreshetov/vue-unicons). The icons itself were designed by [Iconscout](https://github.com/iconscout/unicons).
