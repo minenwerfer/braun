@@ -1,5 +1,5 @@
 import webpack from 'webpack'
-import { Options, scrapper, preloadScript } from './common'
+import { Options, scrapper, icons, preloadScript } from './common'
 
 export function loader(this: webpack.LoaderContext<Options>, source: string) {
   const loaderContext = this
@@ -17,7 +17,7 @@ export class Plugin {
   apply(compiler: webpack.Compiler) {
     compiler.hooks.thisCompilation.tap('Braun', (compilation) => {
       compilation.hooks.finishModules.tap('Braun', () => {
-        const iconNames = [ ...global.braun__gatheredIcons ]
+        const iconNames = [ ...icons ]
         if( iconNames.length === 0 ) {
           return
         }

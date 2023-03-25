@@ -5,7 +5,7 @@ export type Options = {
   ensureList?: Array<string>
 }
 
-const icons = global.braun__gatheredIcons = new Set<string>()
+export const icons = global.braun__gatheredIcons = new Set<string>()
 
 export const preloadScript = (iconNames: Array<string>) =>
 `"${iconNames.join(' ')}".split(' ').forEach((iconName) => {
@@ -48,6 +48,7 @@ export const scrapper = (
   }
 
   shouldAdd.forEach(async (iconName) => {
+    icons.add(iconName)
     const [style, filename] = iconName.includes(':')
       ? iconName.split(':')
       : ['line', iconName]

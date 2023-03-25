@@ -1,18 +1,22 @@
 {
   "name": "braun",
   "version": "0.0.1",
+  "homepage": "https://ringeringeraja.github.io/braun",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "deploy": "cd app && vite build && gh-pages -d ."
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "vite": "4.2.0",
     "webpack": "^5.76.1"
   },
   "devDependencies": {
-    "rollup": "^3.20.2"
+    "@vitejs/plugin-vue": "^4.1.0",
+    "gh-pages": "^5.0.0"
   }
 }
