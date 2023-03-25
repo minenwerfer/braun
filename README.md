@@ -24,7 +24,7 @@ const webpackConfig = {
   resolveLoader: {
     alias: {
       // make sure you have this alias set
-      'icon-loader': 'braun/dist/loader'
+      'icon-loader': 'braun/webpack-loader'
     }
   },
   module: {
@@ -36,8 +36,8 @@ const webpackConfig = {
         loader: 'icon-loader',
         options: {
           // what should we look for in the source files?
-          // in this example we would be using something like <sv-icon name="user" />
-          tag: 'sv-icon',
+          // in this example we would be using something like <c-icon name="user" /> in our source files
+          tag: 'icon',
           // those are always moved
           // this is useful when icon names arent present as literals in files
           ensureList: [
@@ -51,9 +51,28 @@ const webpackConfig = {
   plugins: [
     // not required
     // use this to emit a preload script
-    new require('braun/dist/plugin')()
+    new require('braun/webpack').Plugin()
   ]
 }
+```
+
+### Vite
+
+```typescript
+import defineConfig from 'vite'
+import braun from 'braun/vite'
+
+export default defineConfig({
+  plugins: [
+    braun({
+      tag: 'icon',
+      ensureList: [
+        'user',
+        'settings'
+      ]
+    })
+  ]
+})
 ```
 
 ### The component

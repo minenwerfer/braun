@@ -6,7 +6,7 @@
     data-component="icon"
     fill="blue"
   >
-    <use :href="`/static/icons/${variant}/${name}.svg#root`"></use>
+    <use :href="`static/icons/${variant}/${name}.svg#root`"></use>
   </svg>
 </template>
 
