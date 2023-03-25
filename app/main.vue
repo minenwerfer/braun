@@ -104,7 +104,7 @@ const icons = computed(() => {
 })
 
 const clear = () => {
-  currentStyle.value = 'line'
+  currentStyle.value = ''
   currentCategory.value = ''
   search.value = ''
 }

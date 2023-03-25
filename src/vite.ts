@@ -15,14 +15,17 @@ export default (options: Options = {}): Plugin => ({
       }
     })
   },
-  transform(source) {
-    const scrap = scrapper(
-      options,
-      () => null,
-      (error) => this.warn(error)
-    )
+  transform(source, id) {
+    if( !/node_modules/.test(id) && /\.(t|j)s(on)?/.test(id) ) {
+      const scrap = scrapper(
+        options,
+        () => null,
+        (error) => this.warn(error)
+      )
 
-    scrap(source)
+      scrap(source)
+    }
+
     return {
       code: source
     }

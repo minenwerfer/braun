@@ -11,7 +11,7 @@ Braun is a Vite/Webpack plugin that makes it possible to serve icons statically 
 - You don't have to move all icons at once
 - Direct referencing icons makes browser caching better
 - Icons are inline SVGs, so you can modify them as you want
-- Much less network usage than icon fonts
+- Loads faster than icon fonts
 
 ## Usage
 
