@@ -69,6 +69,9 @@ export default defineConfig({
       ensureList: [
         'user',
         'settings'
+      ],
+      libraries: [
+        'library-that-uses-braun-icons'
       ]
     })
   ]

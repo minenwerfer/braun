@@ -16,18 +16,21 @@ export default (options: Options = {}): Plugin => ({
     })
   },
   transform(source, id) {
-    if( !/node_modules/.test(id) && /\.(t|j)s(on)?/.test(id) ) {
+    if(
+      (!/node_modules/.test(id) || options.libraries?.some((library) => new RegExp(`/${library}/`).test(id)))
+      && /\.((t|j)s(x|on)?|vue|svelte|html?)/.test(id)
+    ) {
       const scrap = scrapper(
         options,
         () => null,
         (error) => this.warn(error)
       )
 
-      scrap(source)
+      scrap(source, id)
     }
-
     return {
-      code: source
+      code: source,
+      map: null
     }
   },
   async generateBundle() {

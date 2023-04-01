@@ -3,6 +3,7 @@ import { readFile } from 'fs/promises'
 export type Options = {
   tag?: string
   ensureList?: Array<string>
+  libraries?: Array<string>
 }
 
 export const icons = global.braun__gatheredIcons = new Set<string>()
