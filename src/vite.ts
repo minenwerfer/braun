@@ -26,7 +26,7 @@ export default (options: Options = {}): Plugin => ({
         (error) => this.warn(error)
       )
 
-      scrap(source, id)
+      scrap(source)
     }
     return {
       code: source,
