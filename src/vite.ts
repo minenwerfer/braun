@@ -11,7 +11,7 @@ export default (options: Options = {}): Plugin => ({
         res.setHeader('content-type', 'image/svg+xml').end(content)
 
       } catch( e: any ) {
-        next(e)
+        next()
       }
     })
   },
@@ -58,6 +58,8 @@ export default (options: Options = {}): Plugin => ({
       return
     }
 
+
+    await mkdir('dist', { recursive: true })
     await writeFile('dist/preload-script.js', preloadScript(iconNames))
   }
 })
