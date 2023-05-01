@@ -34,6 +34,10 @@ export default (options: Options = {}): Plugin => ({
     }
   },
   async generateBundle() {
+    if( options.preEmit ) {
+      await options.preEmit()
+    }
+
     icons.forEach(async (iconName) => {
       const [style, filename] = iconName.includes(':')
         ? iconName.split(':')
@@ -57,7 +61,6 @@ export default (options: Options = {}): Plugin => ({
     if( iconNames.length === 0 ) {
       return
     }
-
 
     await mkdir('dist', { recursive: true })
     await writeFile('dist/preload-script.js', preloadScript(iconNames))
