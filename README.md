@@ -1,5 +1,5 @@
 # Braun
->Icons just in time!
+>On-demand inline SVG icons!
 
 ## Introduction
 
