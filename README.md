@@ -94,7 +94,7 @@ const webpackConfig = {
 }
 ```
 
-### The component
+### Component setup
 
 Next, all you have to do is create your icon component according to your application needs. We gonna be using Vue in this example but it really doesn't matter, you could be using React or anything else, including pure HTML5.
 
@@ -119,7 +119,7 @@ defineProps({
 
 ### Preloading
 
-This loader emits a preloading script that you can include in your root HTML to ensure a smoother user experience.
+In case of options.pack is set to false (or by default when using Webpack) the plugin preloading script that you can include in your root HTML to ensure a smoother user experience.
 ```html
 <script type="text/javascript" src="/preload-icons.js"></script>
 ```
