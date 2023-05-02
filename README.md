@@ -87,7 +87,7 @@ Next, all you have to do is create your icon component according to your applica
     height="24"
     viewBox="0 0 24 24"
   >
-    <use :href="`/assets/icons.svg#${variant}/${name}`"></use>
+    <use :href="`/assets/icons.svg#${variant}:${name}`"></use>
   </svg>
 </template>
 
