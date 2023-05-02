@@ -4,7 +4,7 @@
     height="64"
     viewBox="0 0 24 24"
   >
-    <use :href="`static/icons/${variant}/${name}.svg#root`"></use>
+    <use :href="`assets/icons.svg#${variant}:${name}`"></use>
   </svg>
 </template>
 

@@ -3,17 +3,37 @@
 
 ## Introduction
 
-Braun is a Vite/Webpack plugin that makes it possible to serve icons statically on demand. It searches for icons names in modules source code and moves them to a static folder during the build time. All design credits goes to [Iconscout](https://github.com/iconscout/unicons).
+Braun is a Vite/Webpack plugin that makes it possible to serve icons statically on demand. It searches for icons names in modules source code and compiles them into a single SVG file during the build time. All design credits goes to [Iconscout](https://github.com/iconscout/unicons).
 
 ## Advantages
 
-- It doesn't reflect on bundle size
-- You don't have to move all icons at once
-- Direct referencing icons makes browser caching better
-- Icons are inline SVGs, so you can modify them as you want
-- Loads faster than icon fonts
+- It doesn't reflect on JavaScript bundle size
+- A big project with a lot of icons will generate a SVG file as small as some few kilobytes
+- As icons are referenced directly through svg tag you have the freedom to stylize paths
 
 ## Usage
+
+### Vite
+
+```typescript
+import defineConfig from 'vite'
+import braun from 'braun/vite'
+
+export default defineConfig({
+  plugins: [
+    braun({
+      tag: 'icon',
+      ensureList: [
+        'user',
+        'settings'
+      ],
+      libraries: [
+        'library-that-uses-braun-icons'
+      ]
+    })
+  ]
+})
+```
 
 ### Webpack
 
@@ -56,28 +76,6 @@ const webpackConfig = {
 }
 ```
 
-### Vite
-
-```typescript
-import defineConfig from 'vite'
-import braun from 'braun/vite'
-
-export default defineConfig({
-  plugins: [
-    braun({
-      tag: 'icon',
-      ensureList: [
-        'user',
-        'settings'
-      ],
-      libraries: [
-        'library-that-uses-braun-icons'
-      ]
-    })
-  ]
-})
-```
-
 ### The component
 
 Next, all you have to do is create your icon component according to your application needs. We gonna be using Vue in this example but it really doesn't matter, you could be using React or anything else, including pure HTML5.
@@ -89,7 +87,7 @@ Next, all you have to do is create your icon component according to your applica
     height="24"
     viewBox="0 0 24 24"
   >
-    <use :href="`/static/icons/${variant}/${name}.svg#root`"></use>
+    <use :href="`/assets/icons.svg#${variant}/${name}`"></use>
   </svg>
 </template>
 

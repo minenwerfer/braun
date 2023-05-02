@@ -1,10 +1,12 @@
 import webpack from 'webpack'
-import { Options, scrapper, icons, preloadScript } from './common'
+import { Options, defaultOptions, scrapper, icons, preloadScript } from './common'
 
 export function loader(this: webpack.LoaderContext<Options>, source: string) {
   const loaderContext = this
+  const options = Object.assign(defaultOptions, loaderContext.getOptions())
+
   const scrap = scrapper(
-    loaderContext.getOptions(),
+    options,
     loaderContext.emitFile,
     loaderContext.emitError
   )
