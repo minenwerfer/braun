@@ -13,6 +13,38 @@ Braun is a Vite/Webpack plugin that makes it possible to serve icons statically 
 
 ## Usage
 
+### Configuration
+
+```typescript
+export type Options = {
+  /**
+   * HTML tag to be searched for.
+   */
+  tag?: string
+  /**
+   * Ensure certain icons are always collected.
+   * Useful when icons can't be found with assets search.
+   */
+  ensureList?: Array<string>
+  /**
+   * Will scrap DOM files in the specified libraries case set.
+   */
+  libraries?: Array<string>
+  /**
+   * Lets user execute custom logic before emitting output.
+   * A common use case is to search for icons outside conventional files.
+   */
+  preEmit?: () => Promise<void>
+  /**
+   * Case set to true, compiles all collected icons to a single SVG.
+   * Otherwise will output each icon in a separated SVG file.
+   * (currently unsupported in Webpack).
+   * @default true
+   */
+  pack?: boolean
+}
+```
+
 ### Vite
 
 ```typescript
@@ -22,14 +54,7 @@ import braun from 'braun/vite'
 export default defineConfig({
   plugins: [
     braun({
-      tag: 'icon',
-      ensureList: [
-        'user',
-        'settings'
-      ],
-      libraries: [
-        'library-that-uses-braun-icons'
-      ]
+      // ...
     })
   ]
 })
@@ -55,15 +80,7 @@ const webpackConfig = {
         test: /(\.vue|router\.(t|j)s)$/,
         loader: 'icon-loader',
         options: {
-          // what should we look for in the source files?
-          // in this example we would be using something like <c-icon name="user" /> in our source files
-          tag: 'icon',
-          // those are always moved
-          // this is useful when icon names arent present as literals in files
-          ensureList: [
-            'user',
-            'settings'
-          ]
+          // ...
         }
       },
     ]
