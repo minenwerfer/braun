@@ -9,7 +9,6 @@ Braun is a Vite/Webpack plugin that makes it possible to serve icons statically 
 
 - It doesn't reflect on JavaScript bundle size
 - A big project with a lot of icons will generate a SVG file as small as some few kilobytes
-- As icons are referenced directly through svg tag you have the freedom to stylize paths
 
 ## Usage
 
@@ -28,11 +27,13 @@ export type Options = {
   ensureList?: Array<string>
   /**
    * Will scrap DOM files in the specified libraries case set.
+   * (in webpack you must use a custom module.rules property to emulate this prop).
    */
   libraries?: Array<string>
   /**
    * Lets user execute custom logic before emitting output.
    * A common use case is to search for icons outside conventional files.
+   * (currently unsupported in Webpack).
    */
   preEmit?: () => Promise<void>
   /**

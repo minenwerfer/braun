@@ -12,11 +12,13 @@ export type Options = {
   ensureList?: Array<string>
   /**
    * Will scrap DOM files in the specified libraries case set.
+   * (in webpack you must use a custom module.rules property to emulate this prop).
    */
   libraries?: Array<string>
   /**
    * Lets user execute custom logic before emitting output.
    * A common use case is to search for icons outside conventional files.
+   * (currently unsupported in Webpack).
    */
   preEmit?: () => Promise<void>
   /**
