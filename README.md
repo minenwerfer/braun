@@ -99,6 +99,17 @@ const webpackConfig = {
 Next, all you have to do is create your icon component according to your application needs. We gonna be using Vue in this example but it really doesn't matter, you could be using React or anything else, including pure HTML5.
 
 ```vue
+<script setup>
+withDefaults(
+  defineProps({
+    variant: String,
+    name: String
+  }), {
+    variant: 'line'
+  }
+)
+</script>
+
 <template>
   <svg
     width="24"
@@ -108,13 +119,6 @@ Next, all you have to do is create your icon component according to your applica
     <use :href="`/assets/icons.svg#${variant}:${name}`"></use>
   </svg>
 </template>
-
-<script setup>
-defineProps({
-  variant: String,
-  name: String
-})
-</script>
 ```
 
 ### Preloading
