@@ -22,7 +22,7 @@ export type Options = {
   tag?: string
   /**
    * Ensure certain icons are always collected.
-   * Useful when icons can't be found with assets search.
+   * Useful when icons can't be found with static search.
    */
   ensureList?: Array<string>
   /**

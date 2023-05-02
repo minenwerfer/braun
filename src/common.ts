@@ -39,7 +39,8 @@ const makeExpressions = (options: Options) => {
   const regexes = [
     new RegExp(`<${options.tag}[^>]*[^:]name="([^"]+)"`, 'mg'),
     /<[^>]*[^:]icon="([^"]+)"/mg,
-    /icon: ?['"]([^'"]+)['"]/mg
+    /icon: ?['"]([^'"]+)['"]/mg,
+    /icon: ([\w:-]+)$/mg,
   ]
 
   return regexes
@@ -120,18 +121,26 @@ export const scrapper = (
 export const packTogether = async (icons: Array<string>) => {
   const symbols = []
   for( const iconName of icons ) {
+    if( !iconName ) {
+      continue
+    }
+
     const [style, filename] = iconName.includes(':')
       ? iconName.split(':')
       : ['line', iconName]
 
-    const content = await readFile(`${__dirname}/../icons/${style}/${filename}.svg`)
-    const icon = content.toString()
-      .replace('<svg xmlns="http://www.w3.org/2000/svg"><symbol id="root">', '')
-      .replace('</symbol></svg>', '')
+    try {
+      const content = await readFile(`${__dirname}/../icons/${style}/${filename}.svg`)
+      const icon = content.toString()
+        .replace('<svg xmlns="http://www.w3.org/2000/svg"><symbol id="root">', '')
+        .replace('</symbol></svg>', '')
 
-    symbols.push(
-      `<symbol id="${style}:${filename}">${icon}</symbol>`
-    )
+      symbols.push(
+        `<symbol id="${style}:${filename}">${icon}</symbol>`
+      )
+    } catch( e ) {
+      console.warn(`icon ${iconName} not found`)
+    }
   }
 
   const svg = `<svg xmlns="http://www.w3.org/2000/svg">${symbols.join('')}</svg>`
