@@ -33,12 +33,6 @@ export const defaultOptions: Partial<Options> = {
   pack: true
 }
 
-export type IconStyle =
-  'line'
-  | 'monochrome'
-  | 'solid'
-  | 'thinline'
-
 const makeExpressions = (options: Options) => {
   const regexes = [
     new RegExp(`<${options.tag}[^>]*[^:]name="([^"]+)"`, 'mg'),

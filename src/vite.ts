@@ -16,9 +16,9 @@ export default (_options: Options = {}): Plugin => {
   return {
     name: 'braun',
     configureServer(server) {
-      server.middlewares.use('/assets/icons/', async (req, res, next) => {
+      server.middlewares.use('/assets/icons.svg', async (req, res, next) => {
         try {
-          const content = await readFile(`${__dirname}/../icons${req.url}`)
+          const content = await readFile(`${__dirname}/../icons/icons.svg`)
           res.setHeader('content-type', 'image/svg+xml').end(content)
 
         } catch( e: any ) {
