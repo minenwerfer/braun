@@ -6,7 +6,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "deploy": "cd app && vite build --base=/braun/ && gh-pages -d dist"
+    "deploy": "cd app && vite build --base=/braun/ && gh-pages -d dist",
+    "build": "tsc",
+    "prepublishOnly": "npm run build"
   },
   "exports": {
     ".": "./dist/index.js",
