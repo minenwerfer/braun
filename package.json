@@ -3,7 +3,6 @@
   "version": "0.1.6",
   "homepage": "https://ringeringeraja.github.io/braun",
   "description": "",
-  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "deploy": "cd app && vite build --base=/braun/ && gh-pages -d dist",
@@ -21,10 +20,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "vite": "4.2.0",
     "webpack": "^5.76.1"
   },
   "devDependencies": {
+    "vite": "4.2.0",
     "@vitejs/plugin-vue": "^4.1.0",
     "gh-pages": "^5.0.0"
   }
