@@ -77,7 +77,7 @@ export const scrapper = (
   options: Options,
   emitFn: (newPath: string, content: string|Buffer) => void,
   errorCallback: (e: any) => void
-) => (source: string) => {
+) => async (source: string) => {
   const shouldAdd = new Set<string>()
   const regexes = makeExpressions(options)
 
@@ -97,7 +97,7 @@ export const scrapper = (
     }
   }
 
-  shouldAdd.forEach(async (iconName) => {
+  for( const iconName of shouldAdd ) {
     icons.add(iconName)
     const [style, filename] = iconName.includes(':')
       ? iconName.split(':')
@@ -111,7 +111,7 @@ export const scrapper = (
     } catch( e: any ) {
       errorCallback(e)
     }
-  })
+  }
 }
 
 /**
@@ -143,6 +143,8 @@ export const packTogether = async (icons: Array<string>) => {
     }
   }
 
-  const svg = `<svg xmlns="http://www.w3.org/2000/svg">${symbols.join('')}</svg>`
+  const svg = `<?xml version="1.0" encoding="UTF-8"?>
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg">${symbols.join('')}</svg>`
+
   return svg
 }

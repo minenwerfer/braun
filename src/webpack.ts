@@ -1,7 +1,7 @@
 import webpack from 'webpack'
 import { Options, defaultOptions, scrapper, icons, preloadScript } from './common'
 
-export function loader(this: webpack.LoaderContext<Options>, source: string) {
+export async function loader(this: webpack.LoaderContext<Options>, source: string) {
   const loaderContext = this
   const options = Object.assign(defaultOptions, loaderContext.getOptions())
 
@@ -11,7 +11,7 @@ export function loader(this: webpack.LoaderContext<Options>, source: string) {
     loaderContext.emitError
   )
 
-  scrap(source)
+  await scrap(source)
   loaderContext.callback(null, source)
 }
 

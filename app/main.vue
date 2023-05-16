@@ -1,3 +1,52 @@
+<script setup>
+import { ref, computed, watch } from 'vue'
+import Icon from './components/icon.vue'
+import catalog from './catalog.json'
+
+const styles = new Set(catalog.map(icon => icon.style))
+const categories = new Set(catalog.map(icon => icon.category))
+
+const currentStyle = ref('')
+const currentCategory = ref('')
+const search = ref('')
+const batch = ref(1)
+
+window.addEventListener('scroll', e => {
+  if( document.documentElement.scrollTop + window.innerHeight >= document.documentElement.offsetHeight ) {
+    batch.value = batch.value + 1
+  }
+})
+
+watch(() => [currentStyle.value, currentCategory.value, search.value], () => {
+  window.scrollTo(0, 0)
+  batch.value = 1
+})
+
+const icons = computed(() => {
+  return catalog.
+    filter((icon) => (
+      (!currentStyle.value || icon.style === currentStyle.value)
+      && (
+        !search.value || (
+          new RegExp(search.value).test(icon.name)
+          || icon.tags.some((tag) => new RegExp(search.value).test(tag))
+        )
+      ) && (
+        !currentCategory.value || (
+          icon.category === currentCategory.value
+        )
+      )
+    ))
+    .slice(0, 30 + (30 * batch.value))
+})
+
+const clear = () => {
+  currentStyle.value = ''
+  currentCategory.value = ''
+  search.value = ''
+}
+</script>
+
 <template>
   <div class="topstrip">
     <div class="logo">
@@ -60,54 +109,5 @@
     </div>
   </div>
 </template>
-
-<script setup>
-import { ref, computed, watch } from 'vue'
-import Icon from './components/icon.vue'
-import catalog from './catalog.json'
-
-const styles = new Set(catalog.map(icon => icon.style))
-const categories = new Set(catalog.map(icon => icon.category))
-
-const currentStyle = ref('')
-const currentCategory = ref('')
-const search = ref('')
-const batch = ref(1)
-
-window.addEventListener('scroll', e => {
-  if( document.documentElement.scrollTop + window.innerHeight >= document.documentElement.offsetHeight ) {
-    batch.value = batch.value + 1
-  }
-})
-
-watch(() => [currentStyle.value, currentCategory.value, search.value], () => {
-  window.scrollTo(0, 0)
-  batch.value = 1
-})
-
-const icons = computed(() => {
-  return catalog.
-    filter((icon) => (
-      (!currentStyle.value || icon.style === currentStyle.value)
-      && (
-        !search.value || (
-          new RegExp(search.value).test(icon.name)
-          || icon.tags.some((tag) => new RegExp(search.value).test(tag))
-        )
-      ) && (
-        !currentCategory.value || (
-          icon.category === currentCategory.value
-        )
-      )
-    ))
-    .slice(0, 30 + (30 * batch.value))
-})
-
-const clear = () => {
-  currentStyle.value = ''
-  currentCategory.value = ''
-  search.value = ''
-}
-</script>
 
 <style src="./main.css"></style>

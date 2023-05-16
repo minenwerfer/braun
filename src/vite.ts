@@ -26,7 +26,7 @@ export default (_options: Options = {}): Plugin => {
         }
       })
     },
-    transform(source, id) {
+    async transform(source, id) {
       if(
         (!/node_modules/.test(id) || options.libraries?.some((library) => new RegExp(`/${library}/`).test(id)))
         && /\.((t|j)s(x|on)?|vue|svelte|html?)/.test(id)
@@ -37,7 +37,7 @@ export default (_options: Options = {}): Plugin => {
           (error) => this.warn(error)
         )
 
-        scrap(source)
+        await scrap(source)
       }
       return {
         code: source,
