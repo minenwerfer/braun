@@ -43,6 +43,12 @@ export type Options = {
    * @default true
    */
   pack?: boolean
+  /**
+   * Case set to true will append a timestamp to icons filename to invalidate cache.
+   * Useful when you have cache policies configured in your webserver.
+   * @default false
+   */
+  hash?: boolean
 }
 ```
 
