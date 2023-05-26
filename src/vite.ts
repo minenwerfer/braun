@@ -39,7 +39,7 @@ export default (_options: Options = {}): Plugin => {
           await scrap(source)
         }
 
-        if( options.hash && id.includes(options.tag!) ) {
+        if( process.env.NODE_ENV !== 'development' && options.hash && id.includes(options.tag!) ) {
           const newSource = source.replace('icons.svg', `icons-${hash}.svg`)
           return {
             code: newSource,
