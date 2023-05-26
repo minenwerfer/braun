@@ -6,13 +6,14 @@ import {
   scrapper,
   icons,
   preloadScript,
-  packTogether
+  packTogether,
+  makeHash
 
 } from './common'
 
 export default (_options: Options = {}): Plugin => {
   const options = Object.assign(defaultOptions, _options)
-  const hash = Date.now().toString().slice(-10)
+  const hash = makeHash()
 
   return {
     name: 'braun',

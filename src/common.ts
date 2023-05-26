@@ -154,3 +154,5 @@ export const packTogether = async (icons: Array<string>) => {
 
   return svg
 }
+
+export const makeHash = () => Date.now().toString().slice(-10)
