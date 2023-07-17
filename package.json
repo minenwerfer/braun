@@ -19,12 +19,10 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "dependencies": {
-    "webpack": "^5.76.1"
-  },
   "devDependencies": {
-    "vite": "4.2.0",
     "@vitejs/plugin-vue": "^4.1.0",
-    "gh-pages": "^5.0.0"
+    "vite": "4.2.0",
+    "gh-pages": "^5.0.0",
+    "webpack": "^5.76.1"
   }
 }
